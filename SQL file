@@ -5,6 +5,11 @@
 SELECT *
 from Violence
 
+--Check for Null
+select *
+from Violence
+WHERE coalesce(country, gender, demographics_question, demographics_response, question, survey_year, value) IS NULL
+
 --Check for duplicates
 with RowNumCTE as (Select *,
 	ROW_NUMBER() OVER (
