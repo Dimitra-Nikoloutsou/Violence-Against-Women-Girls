@@ -33,3 +33,9 @@ Question | Respondents were asked if they agreed with the following statements:
 <p>A husband is justified in hitting or beating his wife if she neglects the children</p>
 <p>A husband is justified in hitting or beating his wife if she refuses to have sex with him</p>
 <p>A husband is justified in hitting or beating his wife for at least one specific reason</p>
+
+
+<h2>Business Task</h2>
+To explore the impact of different socio demographic backrounds on the justifications given for committing acts of violence against women.
+
+<h2>Visualisation</h2>
