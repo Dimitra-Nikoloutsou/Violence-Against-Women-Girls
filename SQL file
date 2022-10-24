@@ -1,0 +1,189 @@
+************************
+--CLEANING THE DATA
+***********************
+
+SELECT *
+from Violence
+
+--Check for duplicates
+with RowNumCTE as (Select *,
+	ROW_NUMBER() OVER (
+	PARTITION BY recordid,
+	country,
+      	gender,
+      	demographics_question,
+      	demographics_response,
+      	question,
+      	survey_year, 
+	value
+ORDER BY
+recordid
+) row_num
+From Violence
+)
+
+Select *
+From RowNumCTE
+Where row_num > 1
+
+
+--Change F and M to Female and Male in "Gender" field
+Select Distinct(gender), Count(gender)
+From Violence
+Group by gender
+order by 2
+
+
+Select gender
+, CASE When gender = 'F' THEN 'Female'
+	   When gender = 'M' THEN 'Male'
+	   ELSE gender
+	   END
+From Violence
+
+UPDATE Violence
+set gender=CASE When gender = 'F' THEN 'Female'
+	   When gender = 'M' THEN 'Male'
+	   ELSE gender
+	   END
+From Violence
+
+SELECT *
+from Violence
+
+--Find the types of demographics question
+SELECT distinct demographics_question
+from Violence
+
+--Find the questions
+select distinct question
+from Violence
+
+--Find the Countries
+select DISTINCT country
+from Violence
+
+****************************
+-- MINING THE DATA
+****************************
+
+SELECT *
+FROM Violence
+order by recordid
+
+--Number of countries
+SELECT COUNT(DISTINCT country)
+FROM Violence
+
+--Number of records per country
+SELECT COUNTRY, COUNT(*)
+FROM Violence
+GROUP BY COUNTRY
+
+--Number of records per country per question
+SELECT COUNTRY, COUNT(QUESTION), question
+FROM Violence
+GROUP BY COUNTRY, question
+
+--Number of Unique RecordID
+SELECT DISTINCT recordid, COUNTRY, question
+FROM Violence
+ORDER BY recordid
+
+--Number of demographic questions
+select count(DISTINCT demographics_question)
+from Violence
+
+--Distinct demographic questions
+SELECT distinct demographics_question
+from Violence
+
+--Number of responses per demographic group
+select demographics_question, demographics_response, count(demographics_response)
+from Violence
+group by 2
+order by demographics_question
+
+--Number of demographic groups
+select count(DISTINCT demographics_response)
+from Violence
+
+--Number of responses per gender per country
+select country, count(case when gender='Male' then gender end) as num_males,
+count(case when gender='Female' then gender end) as num_females
+from Violence
+group by country
+
+SELECT COUNTRY, COUNT(QUESTION), question, gender
+FROM Violence
+GROUP BY COUNTRY, question, gender
+
+--Avg Value per question per country
+SELECT country, question, round(avg(value),2) AS avg
+from Violence
+group by 1,2
+
+--Most violent countries per question
+with avg_value as (SELECT country, question, round(avg(value),2) AS avg
+from Violence
+group by 1,2)
+select country, question, max(avg) 
+from avg_value
+group by question
+
+
+--Most violent reason in every country
+with avg_value as (SELECT country, question, round(avg(value),2) AS avg
+from Violence
+group by 1,2)
+select country, question, max(avg) 
+from avg_value
+group by question, country
+
+--Avg Value according to Education
+select 
+gender,
+round(avg(case when demographics_response='Higher' then value end),2) as avg_higher,
+round(avg(case when demographics_response='Secondary' then value end),2) as avg_secondary,
+round(avg(case when demographics_response='Primary' then value end),2) as avg_primary,
+round(avg(case when demographics_response='No education' then value end),2) as avg_no_edu
+from Violence
+group by gender
+
+--Avg Value according to Age
+select 
+gender,
+round(avg(case when demographics_response='15-24' then value end),2) as avg_young,
+round(avg(case when demographics_response='25-34' then value end),2) as avg_middle,
+round(avg(case when demographics_response='35-49' then value end),2) as avg_old
+from Violence
+group by gender
+
+--Avg Value according to Employment
+select 
+gender,
+round(avg(case when demographics_response='Employed for cash' then value end),2) as avg_cash,
+round(avg(case when demographics_response='Employed for kind' then value end),2) as avg_kind,
+round(avg(case when demographics_response='Unemployed' then value end),2) as avg_unemployed
+from Violence
+group by gender
+
+--Avg Value according to Marital Status
+select 
+gender,
+round(avg(case when demographics_response='Married or living together' then value end),2) as avg_married,
+round(avg(case when demographics_response='Never married' then value end),2) as avg_single,
+round(avg(case when demographics_response='Widowed, divorced, separated' then value end),2) as avg_divorced
+from Violence
+group by gender
+
+--Avg Value according to Residence
+select
+gender,
+round(avg(case when demographics_response='Rural' then value end),2) as avg_rural,
+round(avg(case when demographics_response='Urban' then value end),2) as avg_urban
+from Violence
+group by gender
+
+
+
