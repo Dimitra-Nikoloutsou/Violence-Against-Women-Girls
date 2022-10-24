@@ -1,6 +1,16 @@
 # Violence-Against-Women-Girls
 
-About Dataset
+<h2>About Data</h2>
+
+The dataset was taken from <a href="https://www.kaggle.com/code/takkimsncn/violenceagainstwomenandgirls">Kaggle</a>  under the <a href="https://creativecommons.org/publicdomain/zero/1.0/">licence</a>
+
+The survey was conducted by the Demographic and Health Surveys (DHS) Program.
+In the survey participated men and women from different sociodemographic groups such as Education Level, Marital status, Employment, and Age group.
+
+The data describes violence against women and girls from African, Asian, and South American countries.
+
+
+
 About Violence Against Women & Girls
 The Demographic and Health Surveys (DHS) Program exists to advance the global
 understanding of health and population trends in developing countries.
