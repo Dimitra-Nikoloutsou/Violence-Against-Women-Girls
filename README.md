@@ -74,7 +74,7 @@ Most violent countries per questions are:
 
 Violence against women and girls in any form is never acceptable or justifiable.
 
-Unfortunately there are countries where violence is deeply rooted in their culture and the woman's position in the society.
+Unfortunately there are countries where violence is deeply rooted in their culture and beacuse of the woman's position in the society.
 
 Women are so affected from the society that they accept and justify the act of violence.
 
