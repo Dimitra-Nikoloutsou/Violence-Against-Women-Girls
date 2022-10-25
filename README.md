@@ -39,3 +39,21 @@ Question | Respondents were asked if they agreed with the following statements:
 To explore the impact of different socio demographic backrounds on the justifications given for committing acts of violence against women.
 
 <h2>Visualisation</h2>
+
+<a href="https://public.tableau.com/app/profile/dimitra.nikoloutsou/viz/ViolenceagainstWomenandGirls_16666441259140/Story1">Tableau link</a> (Interactive Dashboard)
+
+![Story 1](https://user-images.githubusercontent.com/114480002/197724857-7ba8e07b-9f31-4fa9-ab17-fc29b602ce76.png)
+
+![Story 1 (1)](https://user-images.githubusercontent.com/114480002/197725667-8f4738c7-7d26-4622-8210-1d80155f60d6.png)
+
+<h1> INSIGHTS </h1>
+
+In the survey participated 90 men and 90 women from each country that responded to the questions equally.
+The survey concerned 70 countries in total. 
+There are 6 questions and for every question there are 15 socio demographic groups per gender (180 records per country).
+
+According to the average % of people surveyed in the relevant group who agree with the question, surprisingly
+
+
+
+
