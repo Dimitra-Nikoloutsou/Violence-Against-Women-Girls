@@ -42,17 +42,54 @@ To explore the impact of different socio demographic backrounds on the justifica
 
 <a href="https://public.tableau.com/app/profile/dimitra.nikoloutsou/viz/ViolenceagainstWomenandGirls_16666441259140/Story1">Tableau link</a> (Interactive Dashboard)
 
-![Story 1](https://user-images.githubusercontent.com/114480002/197724857-7ba8e07b-9f31-4fa9-ab17-fc29b602ce76.png)
+![Story 1](https://user-images.githubusercontent.com/114480002/197745675-f8154da4-6363-4d5c-bb46-bd4dc65673c4.png)
 
 ![Story 1 (1)](https://user-images.githubusercontent.com/114480002/197725667-8f4738c7-7d26-4622-8210-1d80155f60d6.png)
 
 <h1> INSIGHTS </h1>
 
 In the survey participated 90 men and 90 women from each country that responded to the questions equally.
+
 The survey concerned 70 countries in total. 
+
 There are 6 questions and for every question there are 15 socio demographic groups per gender (180 records per country).
 
-According to the average % of people surveyed in the relevant group who agree with the question, surprisingly
+According to the average % of people surveyed in the relevant group who agree with the question, surprisingly women tend to agree with violence more than men.
+
+Most popular statement both genders agree with is "A husband is justified in hitting or beating his wife for at least one specific reason".
+
+According to education level, people with higher education have the smallest percentage of agreeing with violence.
+
+Never married women agree less with the act of violence. In contrast men that agree less with this act are married.
+
+People that live in urban areas also have the smallest percentage of agreement regarding residence type.
+
+Despite of the passage of time, young people, especially men, continue to agree with the act of violence. In contrast older women seem to agree less.
+
+Concerning the employment status, people that work in exchange for kind justify more the act of violence in comparison with the ones that work for cash.
+
+Most violent countries per questions are:
+![Untitled-1](https://user-images.githubusercontent.com/114480002/197741136-d63f4887-9632-430f-af39-aa8f844497ca.jpg)
+
+
+Violence against women and girls in any form is never acceptable or justifiable.
+
+Unfortunately there are countries where violence is deeply rooted in their culture and the woman's position in the society.
+
+Women are so affected from the society that they accept and justify the act of violence.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
