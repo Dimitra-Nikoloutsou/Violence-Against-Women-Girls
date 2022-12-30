@@ -3,15 +3,15 @@
 ***********************
 
 SELECT *
-from Violence
+FROM Violence
 
---Check for Null
-select *
-from Violence
-WHERE coalesce(country, gender, demographics_question, demographics_response, question, survey_year, value) IS NULL
+--CHECK FOR NULL
+SELECT *
+FROM Violence
+WHERE COALESCE(country, gender, demographics_question, demographics_response, question, survey_year, value) IS NULL
 
---Check for duplicates
-with RowNumCTE as (Select *,
+--ChHECK FOR DUPLICATES
+WITH rn_cte AS (SELECT *,
 	ROW_NUMBER() OVER (
 	PARTITION BY recordid,
 	country,
@@ -21,52 +21,50 @@ with RowNumCTE as (Select *,
       	question,
       	survey_year, 
 	value
-ORDER BY
-recordid
-) row_num
-From Violence
+ORDER BY recordid) AS row_num
+FROM Violence
 )
 
-Select *
-From RowNumCTE
-Where row_num > 1
+SELECT *
+FROM rn_cte
+WHERE row_num > 1
 
 
 --Change F and M to Female and Male in "Gender" field
-Select Distinct(gender), Count(gender)
-From Violence
-Group by gender
-order by 2
+SELECT DISTINCT(gender), COUNT(gender) AS count_gender
+FROM Violence
+GROUP BY gender
+ORDER BY 2
 
 
-Select gender
-, CASE When gender = 'F' THEN 'Female'
-	   When gender = 'M' THEN 'Male'
+SELECT gender
+, CASE WHEN gender = 'F' THEN 'Female'
+	   WHEN gender = 'M' THEN 'Male'
 	   ELSE gender
 	   END
-From Violence
+FROM Violence
 
 UPDATE Violence
-set gender=CASE When gender = 'F' THEN 'Female'
-	   When gender = 'M' THEN 'Male'
+SET gender=CASE WHEN gender = 'F' THEN 'Female'
+	   WHEN gender = 'M' THEN 'Male'
 	   ELSE gender
 	   END
-From Violence
+FROM Violence
 
 SELECT *
-from Violence
+FROM Violence
 
 --Find the types of demographics question
-SELECT distinct demographics_question
-from Violence
+SELECT DISTINCT demographics_question
+FROM Violence
 
 --Find the questions
-select distinct question
-from Violence
+SELECT DISTINCT question
+FROM Violence
 
 --Find the Countries
-select DISTINCT country
-from Violence
+SELECT DISTINCT country
+FROM Violence
 
 ****************************
 -- MINING THE DATA
@@ -74,7 +72,7 @@ from Violence
 
 SELECT *
 FROM Violence
-order by recordid
+ORDER BY recordid
 
 --Number of countries
 SELECT COUNT(DISTINCT country)
@@ -96,99 +94,99 @@ FROM Violence
 ORDER BY recordid
 
 --Number of demographic questions
-select count(DISTINCT demographics_question)
-from Violence
+SELECT COUNT(DISTINCT demographics_question)
+FROM Violence
 
 --Distinct demographic questions
-SELECT distinct demographics_question
-from Violence
+SELECT DISTINCT demographics_question
+FROM Violence
 
 --Number of responses per demographic group
-select demographics_question, demographics_response, count(demographics_response)
-from Violence
-group by 2
-order by demographics_question
+SELECT demographics_question, demographics_response, COUNT(demographics_response)
+FROM Violence
+GROUP BY 2
+ORDER BY demographics_question
 
 --Number of demographic groups
-select count(DISTINCT demographics_response)
-from Violence
+SELECT COUNT(DISTINCT demographics_response)
+FROM Violence
 
 --Number of responses per gender per country
-select country, count(case when gender='Male' then gender end) as num_males,
-count(case when gender='Female' then gender end) as num_females
-from Violence
-group by country
+SELECT country, COUNT(CASE WHEN gender='Male' THEN gender END) AS num_males,
+COUNT(CASE WHEN gender='Female' THEN gender END) AS num_females
+FROM Violence
+GROUP BY country
 
 SELECT COUNTRY, COUNT(QUESTION), question, gender
 FROM Violence
 GROUP BY COUNTRY, question, gender
 
 --Avg Value per question per country
-SELECT country, question, round(avg(value),2) AS avg
-from Violence
-group by 1,2
+SELECT country, question, ROUND(AVG(value),2) AS avg
+FROM Violence
+GROUP BY 1,2
 
 --Most violent countries per question
-with avg_value as (SELECT country, question, round(avg(value),2) AS avg
-from Violence
-group by 1,2)
-select country, question, max(avg) 
-from avg_value
-group by question
+WITH avg_value AS (SELECT country, question, ROUND(AVG(value),2) AS avg
+FROM Violence
+GROUP BY 1,2)
+SELECT country, question, MAX(avg) 
+FROM avg_value
+GROUP BY question
 
 
 --Most violent reason in every country
-with avg_value as (SELECT country, question, round(avg(value),2) AS avg
-from Violence
-group by 1,2)
-select country, question, max(avg) 
-from avg_value
-group by question, country
+WITH avg_value AS (SELECT country, question, ROUND(AVG(value),2) AS avg
+FROM Violence
+GROUP BY 1,2)
+SELECT country, question, MAX(avg) 
+FROM avg_value
+GROUP BY question, country
 
 --Avg Value according to Education
-select 
+SELECT
 gender,
-round(avg(case when demographics_response='Higher' then value end),2) as avg_higher,
-round(avg(case when demographics_response='Secondary' then value end),2) as avg_secondary,
-round(avg(case when demographics_response='Primary' then value end),2) as avg_primary,
-round(avg(case when demographics_response='No education' then value end),2) as avg_no_edu
-from Violence
-group by gender
+ROUND(AVG(CASE WHEN demographics_response='Higher' THEN value END),2) AS avg_higher,
+ROUND(AVG(CASE WHEN demographics_response='Secondary' THEN value END),2) AS avg_secondary,
+ROUND(AVG(CASE WHEN demographics_response='Primary' THEN value END),2) AS avg_primary,
+ROUND(AVG(CASE WHEN demographics_response='No education' THEN value END),2) AS avg_no_edu
+FROM Violence
+GROUP BY gender
 
 --Avg Value according to Age
-select 
+SELECT
 gender,
-round(avg(case when demographics_response='15-24' then value end),2) as avg_young,
-round(avg(case when demographics_response='25-34' then value end),2) as avg_middle,
-round(avg(case when demographics_response='35-49' then value end),2) as avg_old
-from Violence
-group by gender
+ROUND(AVG(CASE WHEN demographics_response='15-24' THEN value END),2) AS avg_young,
+ROUND(AVG(CASE WHEN demographics_response='25-34' THEN value END),2) AS avg_middle,
+ROUND(AVG(CASE WHEN demographics_response='35-49' THEN value END),2) AS avg_old
+FROM Violence
+GROUP BY gender
 
 --Avg Value according to Employment
-select 
+SELECT
 gender,
-round(avg(case when demographics_response='Employed for cash' then value end),2) as avg_cash,
-round(avg(case when demographics_response='Employed for kind' then value end),2) as avg_kind,
-round(avg(case when demographics_response='Unemployed' then value end),2) as avg_unemployed
-from Violence
-group by gender
+ROUND(AVG(CASE WHEN demographics_response='Employed for cash' THEN value END),2) AS avg_cash,
+ROUND(AVG(CASE WHEN demographics_response='Employed for kind' THEN value END),2) AS avg_kind,
+ROUND(AVG(CASE WHEN demographics_response='Unemployed' THEN value END),2) AS avg_unemployed
+FROM Violence
+GROUP BY gender
 
 --Avg Value according to Marital Status
-select 
+SELECT
 gender,
-round(avg(case when demographics_response='Married or living together' then value end),2) as avg_married,
-round(avg(case when demographics_response='Never married' then value end),2) as avg_single,
-round(avg(case when demographics_response='Widowed, divorced, separated' then value end),2) as avg_divorced
-from Violence
-group by gender
+ROUND(AVG(CASE WHEN demographics_response='Married or living together' THEN value END),2) AS avg_married,
+ROUND(AVG(CASE WHEN demographics_response='Never married' THEN value END),2) AS avg_single,
+ROUND(AVG(CASE WHEN demographics_response='Widowed, divorced, separated' THEN value END),2) AS avg_divorced
+FROM Violence
+GROUP BY gender
 
 --Avg Value according to Residence
-select
+SELECT
 gender,
-round(avg(case when demographics_response='Rural' then value end),2) as avg_rural,
-round(avg(case when demographics_response='Urban' then value end),2) as avg_urban
-from Violence
-group by gender
+ROUND(AVG(CASE WHEN demographics_response='Rural' THEN value END),2) AS avg_rural,
+ROUND(AVG(CASE WHEN demographics_response='Urban' THEN value END),2) AS avg_urban
+FROM Violence
+GROUP BY gender
 
 
 
