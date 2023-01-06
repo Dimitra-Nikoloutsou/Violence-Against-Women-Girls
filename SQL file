@@ -10,7 +10,7 @@ SELECT *
 FROM Violence
 WHERE COALESCE(country, gender, demographics_question, demographics_response, question, survey_year, value) IS NULL
 
---ChHECK FOR DUPLICATES
+--CHECK FOR DUPLICATES
 WITH rn_cte AS (SELECT *,
 	ROW_NUMBER() OVER (
 	PARTITION BY recordid,
